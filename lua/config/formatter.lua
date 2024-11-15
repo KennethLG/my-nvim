@@ -1,24 +1,17 @@
-
-local util = require "formatter.util"
-require("formatter").setup({
-  logging = true,
-  log_level = vim.log.levels.WARN,
-  filetype = {
-    javascript = {
-      require("formatter.filetypes.javascript").prettier
-    },
-    typescript = {
-      require("formatter.filetypes.typescript").prettier
-    },
-    ["*"] = {
-      require("formatter.filetypes.any").remove_trailing_whitespace
-    },
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    javascriptreact = { "prettier" },
+    json = { "prettier" },
   },
 })
 
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*.js", "*.ts" },
-    command = "FormatWriteLock"
+-- Format on save using BufWritePre for async formatting
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.json" },
+  callback = function()
+    require("conform").format({ async = true })
+  end,
 })
-

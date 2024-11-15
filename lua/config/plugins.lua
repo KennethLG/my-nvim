@@ -22,6 +22,7 @@ vim.cmd([[
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'mfussenegger/nvim-lint'
+  Plug 'dracula/vim'
 
   Plug 'akinsho/toggleterm.nvim'
   Plug 'L3MON4D3/LuaSnip'               " Snippet engine
@@ -33,8 +34,9 @@ vim.cmd([[
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'ray-x/lsp_signature.nvim'
   Plug 'numToStr/Comment.nvim'
-  
   Plug 'mg979/vim-visual-multi'
+  Plug 'windwp/nvim-autopairs'
+  Plug 'stevearc/conform.nvim'
   call plug#end()
 ]])
 

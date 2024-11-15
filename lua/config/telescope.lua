@@ -1,7 +1,7 @@
 local telescope = require('telescope')
 telescope.setup({
     defaults = {
-        file_ignore_patterns = {"node_modules", ".git/", "dist", "build"},
+        file_ignore_patterns = {"node_modules", ".git/", "dist", "build", ".png", ".jpg", ".jpeg"},
         mappings = {
             i = {
                 ["<C-u>"] = false,
