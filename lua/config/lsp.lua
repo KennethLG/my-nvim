@@ -33,10 +33,24 @@ lspconfig.eslint.setup({
   end,
 })
 
--- Enable real-time diagnostics in Insert mode
+
+-- Define diagnostic signs with custom icons
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- Configure diagnostics display with live updates in Insert mode
 vim.diagnostic.config({
-  virtual_text = true,          -- Show diagnostic messages inline
-  signs = true,                 -- Show signs in the sign column
-  update_in_insert = true,      -- Update diagnostics while in Insert mode
-  severity_sort = true,         -- Sort diagnostics by severity
+  virtual_text = {
+    prefix = "●",  -- Customize prefix icon for inline text
+    spacing = 4,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = true,  -- Enable live updates in Insert mode
+  severity_sort = true,
 })
+

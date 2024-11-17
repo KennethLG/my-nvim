@@ -3,12 +3,14 @@
 -- Initialize vim-plug
 vim.cmd([[
   call plug#begin('~/.local/share/nvim/plugged')
+  Plug 'nvim-lualine/lualine.nvim'
 
   Plug 'tpope/vim-sensible'             " Basic default settings
   Plug 'junegunn/fzf.vim'               " Fuzzy finder (requires fzf)
   Plug 'scrooloose/nerdtree'            " File explorer
   Plug 'ryanoasis/vim-devicons'
   Plug 'airblade/vim-gitgutter'         " Git diff in the gutter
+  Plug 'github/copilot.vim'
 
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mhartington/formatter.nvim'
@@ -23,6 +25,9 @@ vim.cmd([[
   Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'mfussenegger/nvim-lint'
   Plug 'dracula/vim'
+
+  Plug 'tpope/vim-fugitive'
+  Plug 'lewis6991/gitsigns.nvim'
 
   Plug 'akinsho/toggleterm.nvim'
   Plug 'L3MON4D3/LuaSnip'               " Snippet engine
