@@ -5,6 +5,9 @@ vim.api.nvim_set_keymap("n", "<leader>e", ":NERDTreeToggle<CR>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>Telescope commands<cr>", opts)
+
+vim.api.nvim_set_keymap('n', '<F2>', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("n", "<A-j>", ":m .+1<CR>==", opts)
 vim.api.nvim_set_keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
@@ -34,6 +37,7 @@ vim.api.nvim_set_keymap("n", "<leader>bn", ":let @/ = '' | bnext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>bp", ":let @/ = '' | bprevious<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>bd", ":let @/ = '' | bdelete<CR>", opts)
 
+vim.api.nvim_set_keymap("i", "<C-/>", 'copilot#Accept("<CR>")', { noremap = true, expr = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<leader>bn", ":bnext<CR>", opts)
 -- vim.api.nvim_set_keymap("n", "<leader>bp", ":bprevious<CR>", opts)
 

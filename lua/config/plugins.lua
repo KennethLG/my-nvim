@@ -14,7 +14,6 @@ vim.cmd([[
 
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mhartington/formatter.nvim'
-
   Plug 'williamboman/mason.nvim'          " Mason for managing external tools like LSP servers
   Plug 'williamboman/mason-lspconfig.nvim' " Bridge between Mason and nvim-lspconfig
   Plug 'neovim/nvim-lspconfig'          " LSP support
