@@ -11,6 +11,7 @@ vim.cmd([[
   Plug 'ryanoasis/vim-devicons'
   Plug 'airblade/vim-gitgutter'         " Git diff in the gutter
   Plug 'github/copilot.vim'
+  Plug 'catppuccin/nvim'
 
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mhartington/formatter.nvim'
@@ -25,6 +26,7 @@ vim.cmd([[
   Plug 'mfussenegger/nvim-lint'
   Plug 'dracula/vim'
 
+  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tpope/vim-fugitive'
   Plug 'lewis6991/gitsigns.nvim'
 
@@ -35,6 +37,7 @@ vim.cmd([[
   Plug 'akinsho/bufferline.nvim'
   Plug 'kyazdani42/nvim-web-devicons'   " File icons
   Plug 'nvim-lua/plenary.nvim'          " Required dependency for Telescope
+  Plug 'kylechui/nvim-surround'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'ray-x/lsp_signature.nvim'
   Plug 'numToStr/Comment.nvim'

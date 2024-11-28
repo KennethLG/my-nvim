@@ -14,6 +14,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.swapfiles = false
 vim.opt.wrap = true
 vim.opt.showcmd = true
 vim.opt.laststatus = 2
@@ -23,6 +24,20 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.g.mapleader = "\\"
 require("nvim-autopairs").setup({})
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitGutterAdd', text = '+'},
+    change       = {hl = 'GitGutterChange', text = '~'},
+    delete       = {hl = 'GitGutterDelete', text = '-'},
+    topdelete    = {hl = 'GitGutterDelete', text = '‾'},
+    changedelete = {hl = 'GitGutterChange', text = '~'},
+  },
+  numhl = true,  -- Enable number highlighting for the signs
+}
+
+local function caps_lock()
+  return os.execute("xset q | grep -q 'Caps Lock:   on'") == 0 and "CAPS ON" or ""
+end
 
 local colors = {
   blue   = '#80a0ff',
@@ -32,64 +47,70 @@ local colors = {
   red    = '#ff5189',
   violet = '#d183e8',
   grey   = '#303030',
-  yellow = '#f9dc5c',
-  green  = '#98c379',
 }
 
--- Custom function to display Caps Lock state
+local bubbles_theme = {
+  normal = {
+    a = { fg = colors.black, bg = colors.violet },
+    b = { fg = colors.white, bg = colors.grey },
+    c = { fg = colors.white },
+  },
 
-local function caps_lock()
-  return os.execute("xset q | grep -q 'Caps Lock:   on'") == 0 and "CAPS ON" or ""
-end
+  insert = { a = { fg = colors.black, bg = colors.blue } },
+  visual = { a = { fg = colors.black, bg = colors.cyan } },
+  replace = { a = { fg = colors.black, bg = colors.red } },
 
--- Lualine setup
+  inactive = {
+    a = { fg = colors.white, bg = colors.black },
+    b = { fg = colors.white, bg = colors.black },
+    c = { fg = colors.white },
+  },
+}
+
 require('lualine').setup {
   options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    always_show_tabline = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
-    }
+    theme = bubbles_theme,
+    component_separators = '',
+    section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
+    lualine_b = { { 'filename', path=1 }, 'branch' },
     lualine_c = {
-      {'filename', path = 1},
-      { caps_lock, color = { fg = colors.yellow, bg = colors.black, gui = 'bold' } },
+      '%=', caps_lock
     },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_x = {},
+    lualine_y = { 'filetype', 'progress' },
+    lualine_z = {
+      { 'location', separator = { right = '' }, left_padding = 2 },
+      {
+        function()
+          local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+          if result.total == 0 then
+            return ''
+          end
+          return string.format('%d/%d', result.current, result.total)
+        end,
+        icon = ''
+      },
+    },
   },
   inactive_sections = {
-    lualine_a = {},
+    lualine_a = { 'filename' },
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = { 'location' },
   },
   tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
+  extensions = {},
 }
-
+-- Custom function to display Caps Lock state
 vim.cmd[[colorscheme dracula]]
 vim.g.dracula_colorterm = 0   -- Disable term colors if using a non-truecolor terminal
 vim.g.dracula_italic_comment = true  -- Enable italic comments
 -- vim.g.dracula_transparent_bg = true  -- Make the background transparent
 vim.g.NERDTreeShowHidden = 1
+
+require('nvim-surround').setup({})

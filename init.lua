@@ -12,3 +12,9 @@ require('config.formatter')
 require('config.mappings')   -- Key mappings
 require('config.null-ls')
 require('config.treesitter')
+
+-- vim.filetype.add({
+--   extension = {
+--     gml = "gml"
+--   }
+-- })

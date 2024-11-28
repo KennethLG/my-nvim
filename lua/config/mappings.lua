@@ -15,8 +15,8 @@ vim.api.nvim_set_keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 vim.api.nvim_set_keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
-vim.api.nvim_set_keymap("n", "]e", "<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "]e", "<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR})<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR})<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader><space>", ":let @/ = '' | nohlsearch<CR>", { noremap = true, silent = true })
 -- Go to definition
@@ -37,9 +37,9 @@ vim.api.nvim_set_keymap("n", "<leader>bn", ":let @/ = '' | bnext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>bp", ":let @/ = '' | bprevious<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>bd", ":let @/ = '' | bdelete<CR>", opts)
 
-vim.api.nvim_set_keymap("i", "<C-/>", 'copilot#Accept("<CR>")', { noremap = true, expr = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>bn", ":bnext<CR>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>bp", ":bprevious<CR>", opts)
+vim.api.nvim_set_keymap("i", "<C-l>", 'copilot#Accept("<CR>")', { noremap = true, expr = true, silent = true })
+vim.g.copilot_no_tab_map = true
+
 
 vim.keymap.set("n", "<C-a>", "ggVG", opts)
 vim.api.nvim_set_keymap("n", "<leader>f", ":Format<CR>", opts)

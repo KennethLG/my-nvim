@@ -13,6 +13,17 @@ local on_attach = function(client, bufnr)
   if client.name == "tsserver" or client.name == "eslint" then
     client.server_capabilities.documentFormattingProvider = false
   end
+
+  require('lsp_signature').setup({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    hint_enable = true, -- This is recommended, if you want to enable signature on hover
+    floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+    max_width = 80,
+    transparency = 20,
+    handler_opts = {
+      border = "single"
+    }
+  })
 end
 
 -- Configure TypeScript and ESLint servers with Mason-LSPconfig
@@ -53,4 +64,3 @@ vim.diagnostic.config({
   update_in_insert = true,  -- Enable live updates in Insert mode
   severity_sort = true,
 })
-
