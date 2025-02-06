@@ -14,8 +14,15 @@ require("toggleterm").setup({
 
 -- Keybindings
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })    -- Exit terminal to normal mode
--- vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true }) -- Move to the right split
--- vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true }) -- Move to the left split
--- vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true }) -- Move to the bottom split
--- vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true }) -- Move to the top split
+local function map_toggleterm(id, key)
+  vim.keymap.set("n", key, function()
+    require("toggleterm.terminal").Terminal
+      :new({ id = id, hidden = true })
+      :toggle()
+  end, { noremap = true, silent = true })
+end
 
+-- Bind keys to specific terminal instances
+map_toggleterm(1, "<leader>1")  -- Open Terminal 1 with <leader>1
+map_toggleterm(2, "<leader>2")  -- Open Terminal 2 with <leader>2
+map_toggleterm(3, "<leader>3")  -- Open Terminal 3 with <leader>3

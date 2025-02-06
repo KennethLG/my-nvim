@@ -3,7 +3,7 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-  ensure_installed = { "ts_ls", "jsonls" },  -- Auto-install these servers
+  ensure_installed = { "ts_ls", "biome" },  -- Auto-install these servers
   automatic_installation = true,
 })
 
@@ -35,7 +35,7 @@ require("mason-lspconfig").setup_handlers({
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts )
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts) 
 	
-	vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+	-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)

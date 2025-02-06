@@ -18,16 +18,12 @@ require("neo-tree").setup({
       enabled = true, -- Focus the buffer you're working on
     },
   },
-  window = {
-    width = 30,
-    -- mappings = {
-    --   ["<space>"] = "none", -- Disable space key to prevent accidental toggling
-    -- },
-  },
 })
 
 -- Keybindings
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })    -- Toggle Neo-tree
-vim.keymap.set('n', '<leader>r', ':Neotree refresh<CR>', { noremap = true, silent = true }) -- Refresh Neo-tree
-vim.keymap.set('n', '<leader>n', ':Neotree focus<CR>', { noremap = true, silent = true })   -- Focus Neo-tree
+
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true })    -- Toggle Neo-tree
+-- vim.keymap.set('n', '<leader>r', ':Neotree refresh<CR>', { noremap = true, silent = true }) -- Refresh Neo-tree
+-- vim.keymap.set('n', '<leader>n', ':Neotree focus<CR>', { noremap = true, silent = true })   -- Focus Neo-tree
+
 

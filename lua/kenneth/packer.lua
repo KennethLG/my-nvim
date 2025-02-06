@@ -51,4 +51,14 @@ return require('packer').startup(function(use)
   use {
     "github/copilot.vim"
   }
+  use {
+    "folke/which-key.nvim",
+    config = function() require("which-key").setup {} end
+  }
+  use {
+    "akinsho/nvim-bufferline",
+  }
+  use {
+    "stevearc/conform.nvim",
+  }
 end)
