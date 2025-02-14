@@ -26,9 +26,35 @@ require("mason-lspconfig").setup_handlers({
 			on_attach = function(client, bufnr)
 				local opts = { buffer = bufnr, remap = false }
 				client.server_capabilities.documentFormattingProvider = false
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+
+				local telescope_builtin = require("telescope.builtin")
+
+				-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+				-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+				vim.keymap.set("n", "gr", function()
+					telescope_builtin.lsp_references({
+						show_line = true,
+					})
+				end, opts)
+
+        vim.keymap.set("n", "gd", function()
+          telescope_builtin.lsp_definitions({
+            show_line = true,
+          })
+        end, opts)
+
+        vim.keymap.set("n", "gi", function()
+          telescope_builtin.lsp_implementations({
+            show_line = true,
+          })
+        end, opts)
+
+        vim.keymap.set("n", "gt", function()
+          telescope_builtin.lsp_type_definitions({
+            show_line = true,
+          })
+        end, opts)
 
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
