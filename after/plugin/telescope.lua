@@ -8,6 +8,8 @@ require("telescope").setup({
 				preview_width = 0.7,
 			},
 		},
+		path_display = { "truncate" },
+		dynamic_preview_title = true,
 	},
 })
 
