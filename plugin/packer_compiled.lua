@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/orson/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+  dracula = {
+    loaded = true,
+    path = "/home/orson/.local/share/nvim/site/pack/packer/start/dracula",
+    url = "https://github.com/dracula/vim"
+  },
   harpoon = {
     loaded = true,
     path = "/home/orson/.local/share/nvim/site/pack/packer/start/harpoon",

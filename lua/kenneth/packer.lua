@@ -70,4 +70,5 @@ return require("packer").startup(function(use)
 	use({
 		"tpope/vim-fugitive",
 	})
+	use({ "dracula/vim", as = "dracula" })
 end)
