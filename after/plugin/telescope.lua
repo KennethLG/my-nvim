@@ -4,8 +4,8 @@ require("telescope").setup({
 		layout_config = {
 			horizontal = {
 				prompt_position = "bottom",
-				results_width = 0.3,
-				preview_width = 0.7,
+				results_width = 0.4,
+				preview_width = 0.6,
 			},
 		},
 		path_display = { "truncate" },

@@ -71,4 +71,8 @@ return require("packer").startup(function(use)
 		"tpope/vim-fugitive",
 	})
 	use({ "dracula/vim", as = "dracula" })
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    as = "ibl"
+  })
 end)
