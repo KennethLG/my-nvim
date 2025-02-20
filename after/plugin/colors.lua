@@ -1,5 +1,8 @@
 require("catppuccin").setup({
-	flavour = "mocha",
+	-- flavour = "latte",
+	flavour = "frappe",
+	-- flavour = "macchiato",
+	-- flavour = "mocha",
 	transparent_background = true,
 	integrations = {
 		cmp = true,
