@@ -47,6 +47,7 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"windwp/nvim-autopairs",
+    event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
@@ -54,6 +55,7 @@ return require("packer").startup(function(use)
 	use({
 		"github/copilot.vim",
 	})
+
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -71,8 +73,8 @@ return require("packer").startup(function(use)
 		"tpope/vim-fugitive",
 	})
 	use({ "dracula/vim", as = "dracula" })
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    as = "ibl"
-  })
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		as = "ibl",
+	})
 end)

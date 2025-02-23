@@ -124,9 +124,9 @@ _G.packer_plugins = {
     path = "/home/orson/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
-  ["indent-blankline.nvim"] = {
+  ibl = {
     loaded = true,
-    path = "/home/orson/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    path = "/home/orson/.local/share/nvim/site/pack/packer/start/ibl",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lualine.nvim"] = {
