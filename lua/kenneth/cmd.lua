@@ -13,3 +13,5 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   end
 })
 
+vim.o.statusline = "hello world"
+

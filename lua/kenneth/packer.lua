@@ -47,7 +47,7 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"windwp/nvim-autopairs",
-    event = "InsertEnter",
+		event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
@@ -76,5 +76,14 @@ return require("packer").startup(function(use)
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		as = "ibl",
+	})
+	use({
+		"mfussenegger/nvim-dap",
+    requires = {
+      "rcarriga/nvim-dap-ui", -- UI for debugging
+      "mxsdev/nvim-dap-vscode-js", -- VSCode JS DAP adapter
+      "nvim-telescope/telescope-dap.nvim", -- Telescope integration
+      "nvim-neotest/nvim-nio"
+    }
 	})
 end)
