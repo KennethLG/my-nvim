@@ -3,88 +3,65 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome" }, -- Auto-install these servers
+	ensure_installed = { "ts_ls", "biome", "rust_analyzer" }, -- Auto-install these servers
 	automatic_installation = true,
 })
 
 -- LSP Configuration
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local telescope_builtin = require("telescope.builtin")
+
+local function on_attach(client, bufnr)
+	local opts = { buffer = bufnr, remap = false }
+	client.server_capabilities.documentFormattingProvider = false -- Disable formatting if needed
+
+	-- Telescope-based LSP navigation
+	vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions({ show_line = true }) end, opts)
+	vim.keymap.set("n", "gr", function() telescope_builtin.lsp_references({ show_line = true }) end, opts)
+	vim.keymap.set("n", "gi", function() telescope_builtin.lsp_implementations({ show_line = true }) end, opts)
+	vim.keymap.set("n", "gt", function() telescope_builtin.lsp_type_definitions({ show_line = true }) end, opts)
+
+	-- Standard LSP keymaps
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+	-- Diagnostics navigation
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+
+	-- Navigate only errors
+	vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+	vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+
+	-- Show diagnostics popup
+	vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
+end
 
 -- Handler for all servers
 require("mason-lspconfig").setup_handlers({
 	function(server_name)
 		lspconfig[server_name].setup({
 			capabilities = capabilities,
+      on_attach = on_attach,
 		})
 	end,
 
-	-- Custom settings for TypeScript/JavaScript
-	["ts_ls"] = function()
-		lspconfig.ts_ls.setup({
-			capabilities = capabilities,
-			on_attach = function(client, bufnr)
-				local opts = { buffer = bufnr, remap = false }
-				client.server_capabilities.documentFormattingProvider = false
-
-				local telescope_builtin = require("telescope.builtin")
-
-				-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "gr", function()
-					telescope_builtin.lsp_references({
-						show_line = true,
-					})
-				end, opts)
-
-        vim.keymap.set("n", "gd", function()
-          telescope_builtin.lsp_definitions({
-            show_line = true,
-          })
-        end, opts)
-
-        vim.keymap.set("n", "gi", function()
-          telescope_builtin.lsp_implementations({
-            show_line = true,
-          })
-        end, opts)
-
-        vim.keymap.set("n", "gt", function()
-          telescope_builtin.lsp_type_definitions({
-            show_line = true,
-          })
-        end, opts)
-
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-				vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-				vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-
-				vim.keymap.set("n", "[e", function()
-					vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
-				end, { noremap = true, silent = true })
-
-				vim.keymap.set("n", "]e", function()
-					vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-				end, { noremap = true, silent = true })
-
-				vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { noremap = true, silent = true })
-			end,
-		})
-	end,
-
-	-- Custom settings for JSON
-	["jsonls"] = function()
-		lspconfig.jsonls.setup({
-			capabilities = capabilities,
-		})
-	end,
+  ["rust_analyzer"] = function()
+    lspconfig.rust_analyzer.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        ["rust-analyzer"] = {
+          checkOnSave = { command = "clippy" }, -- Use Clippy for better linting
+          cargo = { allFeatures = true },
+          procMacro = { enable = true },
+        },
+      },
+    })
+  end,
 })
 
 -- Keybindings for LSP
