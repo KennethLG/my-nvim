@@ -30,3 +30,7 @@ vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
 	replace_keycodes = false,
 })
 vim.g.copilot_no_tab_map = true
+
+vim.keymap.set("n", "zR", function() vim.cmd("set foldlevel=99") end) -- Open all folds
+vim.keymap.set("n", "zM", function() vim.cmd("set foldlevel=0") end)  -- Close all folds
+

@@ -12,3 +12,5 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     vim.cmd('silent! loadview') -- Restore view
   end
 })
+
+
