@@ -1,19 +1,14 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR><Esc>", { noremap = true, silent = true })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- vim.keymap.set("n", "J", "mzJ`z")
-
 vim.keymap.set("x", "<leader>p", '"_dP')
-
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
 
 vim.keymap.set("n", "Q", "<nop>")
-
 -- Move between splits (windows) using Ctrl + h/j/k/l
 -- vim.keymap.set("n", "<C-h>", "<C-w>h") -- Move to the split on the left
 -- vim.keymap.set("n", "<C-l>", "<C-w>l") -- Move to the split on the right

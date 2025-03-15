@@ -46,15 +46,14 @@ return require("packer").startup(function(use)
 		},
 	})
 	use({
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
-	})
-	use({
 		"github/copilot.vim",
 	})
+  use({
+    "echasnovski/mini.pairs",
+    config = function()
+      require("mini.pairs").setup()
+    end,
+  })
 
 	use({
 		"folke/which-key.nvim",
@@ -86,4 +85,7 @@ return require("packer").startup(function(use)
       "nvim-neotest/nvim-nio"
     }
 	})
+  use({
+    "RRethy/vim-illuminate",
+  })
 end)
