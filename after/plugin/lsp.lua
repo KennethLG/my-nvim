@@ -3,7 +3,7 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome", "rust_analyzer" }, -- Auto-install these servers
+	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "omnisharp" }, -- Auto-install these servers
 	automatic_installation = true,
 })
 
@@ -60,6 +60,21 @@ require("mason-lspconfig").setup_handlers({
           procMacro = { enable = true },
         },
       },
+    })
+  end,
+
+  ["clangd"] = function()
+    lspconfig.clangd.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end,
+
+  ["omnisharp"] = function()
+    lspconfig.omnisharp.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
     })
   end,
 })
