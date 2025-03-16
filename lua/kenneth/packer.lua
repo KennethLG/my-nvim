@@ -88,4 +88,7 @@ return require("packer").startup(function(use)
   use({
     "RRethy/vim-illuminate",
   })
+  use({
+    "JafarDakhan/vim-gml"
+  })
 end)

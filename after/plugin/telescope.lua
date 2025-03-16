@@ -10,6 +10,7 @@ require("telescope").setup({
 		},
 		path_display = { "truncate" },
 		dynamic_preview_title = true,
+    file_ignore_patterns = { ".yy", ".png", ".mp3", ".wav" }
 	},
 })
 
