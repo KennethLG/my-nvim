@@ -6,6 +6,8 @@ require("conform").setup({
 		typescriptreact = { "prettier", "eslint_d" },
 		json = { "prettier" },
 		lua = { "stylua" },
+    cpp = { "clang_format" },
+    c = { "clang_format" },
 	},
 	-- format_on_save = {
 	-- 	timeout_ms = 500,

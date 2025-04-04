@@ -45,9 +45,6 @@ return require("packer").startup(function(use)
 			"nvim-tree/nvim-web-devicons",
 		},
 	})
-	use({
-		"github/copilot.vim",
-	})
   use({
     "echasnovski/mini.pairs",
     config = function()
@@ -87,5 +84,11 @@ return require("packer").startup(function(use)
 	})
   use({
     "RRethy/vim-illuminate",
+  })
+  use({
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
   })
 end)

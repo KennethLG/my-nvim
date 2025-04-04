@@ -3,7 +3,7 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome", "rust_analyzer" }, -- Auto-install these servers
+	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd" }, -- Auto-install these servers
 	automatic_installation = true,
 })
 
@@ -62,6 +62,17 @@ require("mason-lspconfig").setup_handlers({
       },
     })
   end,
+
+  ["clangd"] = function ()
+    lspconfig.clangd.setup({
+      capabilities = capabilities,
+      on_attach = function (client, bufnr)
+        client.server_capabilities.signatureHelperProvider = false
+        on_attach(client, bufnr)
+      end,
+    })
+  end,
+
 })
 
 -- Keybindings for LSP
