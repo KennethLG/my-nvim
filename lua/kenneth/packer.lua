@@ -28,15 +28,15 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- Optional, for file icons
-			"MunifTanjim/nui.nvim",
-		},
-	})
+	-- use({
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	branch = "v3.x",
+	-- 	requires = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons", -- Optional, for file icons
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- })
 	use({ "akinsho/toggleterm.nvim", version = "*" })
 	use({ "catppuccin/nvim", as = "catppuccin" })
 	use({
@@ -45,12 +45,12 @@ return require("packer").startup(function(use)
 			"nvim-tree/nvim-web-devicons",
 		},
 	})
-  use({
-    "echasnovski/mini.pairs",
-    config = function()
-      require("mini.pairs").setup()
-    end,
-  })
+	use({
+		"echasnovski/mini.pairs",
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	})
 
 	use({
 		"folke/which-key.nvim",
@@ -75,20 +75,39 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"mfussenegger/nvim-dap",
-    requires = {
-      "rcarriga/nvim-dap-ui", -- UI for debugging
-      "mxsdev/nvim-dap-vscode-js", -- VSCode JS DAP adapter
-      "nvim-telescope/telescope-dap.nvim", -- Telescope integration
-      "nvim-neotest/nvim-nio"
-    }
+		requires = {
+			"rcarriga/nvim-dap-ui", -- UI for debugging
+			"mxsdev/nvim-dap-vscode-js", -- VSCode JS DAP adapter
+			"nvim-telescope/telescope-dap.nvim", -- Telescope integration
+			"nvim-neotest/nvim-nio",
+		},
 	})
-  use({
-    "RRethy/vim-illuminate",
-  })
-  use({
-    'windwp/nvim-ts-autotag',
-    config = function()
-      require('nvim-ts-autotag').setup()
-    end
-  })
+	use({
+		"RRethy/vim-illuminate",
+	})
+	use({
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	})
+	use({
+		"ray-x/lsp_signature.nvim",
+	})
+	use({
+		"antosha417/nvim-lsp-file-operations",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-tree.lua",
+		},
+		config = function()
+			require("lsp-file-operations").setup()
+		end,
+	})
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+	})
 end)

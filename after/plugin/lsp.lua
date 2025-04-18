@@ -11,10 +11,20 @@ require("mason-lspconfig").setup({
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local telescope_builtin = require("telescope.builtin")
+local lsp_signature = require("lsp_signature")
 
 local function on_attach(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 	client.server_capabilities.documentFormattingProvider = false -- Disable formatting if needed
+
+  lsp_signature.on_attach({
+    bind = true,
+    handler_opts = {
+      border = "rounded"
+    },
+    hint_enable = true,
+    floating_window = true
+  }, bufnr)
 
 	-- Telescope-based LSP navigation
 	vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions({ show_line = true }) end, opts)

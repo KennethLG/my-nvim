@@ -15,16 +15,11 @@ vim.keymap.set("n", "Q", "<nop>")
 -- vim.keymap.set("n", "<C-j>", "<C-w>j") -- Move to the split below
 -- vim.keymap.set("n", "<C-k>", "<C-w>k") -- Move to the split above
 
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { noremap = true })
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true })
+-- vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { noremap = true })
+-- vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true })
 
 vim.keymap.set("n", "<leader>bd", ":bp | bd #<CR>", { noremap = true })
 
-vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
-})
-vim.g.copilot_no_tab_map = true
 
 vim.keymap.set("n", "zR", function() vim.cmd("set foldlevel=99") end) -- Open all folds
 vim.keymap.set("n", "zM", function() vim.cmd("set foldlevel=0") end)  -- Close all folds

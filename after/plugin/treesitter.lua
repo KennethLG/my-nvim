@@ -26,8 +26,4 @@ require'nvim-treesitter.configs'.setup {
   fold = {
     enable = true,
   },
-
-  autotag = {
-    enable = true,
-  }
 }
