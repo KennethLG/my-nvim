@@ -80,6 +80,10 @@ require("mason-lspconfig").setup_handlers({
         client.server_capabilities.signatureHelperProvider = false
         on_attach(client, bufnr)
       end,
+      root_dir = function ()
+        return vim.fn.getcwd()
+      end,
+      cmd = { "clangd", "--background-index" }
     })
   end,
 
