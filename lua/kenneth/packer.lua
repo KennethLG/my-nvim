@@ -17,8 +17,8 @@ return require("packer").startup(function(use)
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
-      { "williamboman/mason.nvim", tag = "v1.*"},
-      { "williamboman/mason-lspconfig.nvim", tag = "v1.*" },
+			{ "williamboman/mason.nvim", tag = "v1.*" },
+			{ "williamboman/mason-lspconfig.nvim", tag = "v1.*" },
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -99,13 +99,6 @@ return require("packer").startup(function(use)
 		"nvim-tree/nvim-tree.lua",
 		requires = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-	})
-	use({
-		"folke/noice.nvim",
-		requires = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
 		},
 	})
 end)
