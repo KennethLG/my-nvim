@@ -7,6 +7,17 @@ require("lualine").setup({
 		lualine_b = { "branch" },
 		lualine_c = {
 			{ "filename", path = 1 }, -- Add this line for relative path
+			{
+				"diagnostics",
+				sources = { "nvim_lsp" },
+				sections = { "error", "warn", "info" },
+				symbols = {
+					error = " ", -- nf-oct-bug
+					warn = " ", -- nf-md-alert_circle
+					info = " ", -- nf-oct-info
+					hint = " ", -- nf-md-lightbulb_on_outline
+				},
+			},
 		},
 		lualine_x = { "filetype" },
 		lualine_y = { "progress" },
