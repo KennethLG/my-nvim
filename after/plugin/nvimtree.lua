@@ -38,6 +38,8 @@ require("nvim-tree").setup({
 				api.node.open.edit()
 			end
 		end, opts("Open File or Expand Directory"))
+    vim.keymap.set("n", "<CR>", require("nvim-tree.api").node.open.edit, opts("Open"))
+
 	end,
 })
 
