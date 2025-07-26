@@ -7,7 +7,7 @@ require("toggleterm").setup({
   shading_factor = 2,
   start_in_insert = true,           -- Start terminal in insert mode
   persist_size = true,              -- Remember terminal size
-  direction = "horizontal",         -- Terminal opens horizontally (can be "vertical" or "float")
+  direction = "float",         -- Terminal opens horizontally (can be "vertical" or "float")
   close_on_exit = true,             -- Close terminal when the process exits
   shell = vim.o.shell,              -- Use the default shell
 })
