@@ -4,7 +4,6 @@ require("mason").setup()
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
 	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd" }, -- Auto-install these servers
-	automatic_installation = true,
 })
 
 -- LSP Configuration
@@ -17,20 +16,28 @@ local function on_attach(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 	client.server_capabilities.documentFormattingProvider = false -- Disable formatting if needed
 
-  lsp_signature.on_attach({
-    bind = true,
-    handler_opts = {
-      border = "rounded"
-    },
-    hint_enable = true,
-    floating_window = true
-  }, bufnr)
+	lsp_signature.on_attach({
+		bind = true,
+		handler_opts = {
+			border = "rounded",
+		},
+		hint_enable = true,
+		floating_window = true,
+	}, bufnr)
 
 	-- Telescope-based LSP navigation
-	vim.keymap.set("n", "gd", function() telescope_builtin.lsp_definitions({ show_line = true }) end, opts)
-	vim.keymap.set("n", "gr", function() telescope_builtin.lsp_references({ show_line = true }) end, opts)
-	vim.keymap.set("n", "gi", function() telescope_builtin.lsp_implementations({ show_line = true }) end, opts)
-	vim.keymap.set("n", "gt", function() telescope_builtin.lsp_type_definitions({ show_line = true }) end, opts)
+	vim.keymap.set("n", "gd", function()
+		telescope_builtin.lsp_definitions({ show_line = true })
+	end, opts)
+	vim.keymap.set("n", "gr", function()
+		telescope_builtin.lsp_references({ show_line = true })
+	end, opts)
+	vim.keymap.set("n", "gi", function()
+		telescope_builtin.lsp_implementations({ show_line = true })
+	end, opts)
+	vim.keymap.set("n", "gt", function()
+		telescope_builtin.lsp_type_definitions({ show_line = true })
+	end, opts)
 
 	-- Standard LSP keymaps
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -43,53 +50,42 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
 	-- Navigate only errors
-	vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
-	vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+	vim.keymap.set("n", "[e", function()
+		vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+	end, opts)
+	vim.keymap.set("n", "]e", function()
+		vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+	end, opts)
 
 	-- Show diagnostics popup
 	vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
 end
 
--- Handler for all servers
-require("mason-lspconfig").setup_handlers({
-	function(server_name)
-		lspconfig[server_name].setup({
-			capabilities = capabilities,
-      on_attach = on_attach,
-		})
-	end,
-
-  ["rust_analyzer"] = function()
-    lspconfig.rust_analyzer.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        ["rust-analyzer"] = {
-          checkOnSave = { command = "clippy" }, -- Use Clippy for better linting
-          cargo = { allFeatures = true },
-          procMacro = { enable = true },
-        },
-      },
-    })
-  end,
-
-  ["clangd"] = function ()
-    lspconfig.clangd.setup({
-      capabilities = capabilities,
-      on_attach = function (client, bufnr)
-        client.server_capabilities.signatureHelperProvider = false
-        on_attach(client, bufnr)
-      end,
-      root_dir = function ()
-        return vim.fn.getcwd()
-      end,
-      cmd = { "clangd", "--background-index" }
-    })
-  end,
-
+vim.lsp.config("*", {
+	capabilities = capabilities,
+	on_attach = on_attach,
 })
 
--- Keybindings for LSP
+vim.lsp.config("rust_analyzer", {
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = { command = "clippy" },
+			cargo = { allFeatures = true },
+			procMacro = { enable = true },
+		},
+	},
+})
+
+vim.lsp.config("clangd", {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.signatureHelpProvider = nil
+		on_attach(client, bufnr)
+	end,
+	root_dir = function()
+		return vim.fn.getcwd()
+	end,
+	cmd = { "clangd", "--background-index" },
+})
 
 vim.diagnostic.config({
 	virtual_text = true, -- Show diagnostics inline
