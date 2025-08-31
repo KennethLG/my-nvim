@@ -3,7 +3,7 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd" }, -- Auto-install these servers
+	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls" }, -- Auto-install these servers
 })
 
 -- LSP Configuration
