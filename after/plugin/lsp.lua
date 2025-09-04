@@ -1,10 +1,3 @@
--- Mason setup
-require("mason").setup()
-
--- Mason-LSPConfig setup with automatic installation
-require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls" }, -- Auto-install these servers
-})
 
 -- LSP Configuration
 local lspconfig = require("lspconfig")
@@ -61,12 +54,14 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
 end
 
-vim.lsp.config("*", {
-	capabilities = capabilities,
-	on_attach = on_attach,
+lspconfig.ts_ls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
 })
 
-vim.lsp.config("rust_analyzer", {
+lspconfig.rust_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
 			checkOnSave = { command = "clippy" },
@@ -76,7 +71,7 @@ vim.lsp.config("rust_analyzer", {
 	},
 })
 
-vim.lsp.config("clangd", {
+lspconfig.clangd.setup({
 	on_attach = function(client, bufnr)
 		client.server_capabilities.signatureHelpProvider = nil
 		on_attach(client, bufnr)
@@ -122,3 +117,12 @@ cmp.setup({
 		ghost_text = true, -- Shows "ghost" text for suggestions
 	},
 })
+
+-- Mason setup
+require("mason").setup()
+
+-- Mason-LSPConfig setup with automatic installation
+require("mason-lspconfig").setup({
+  ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls" }, -- Auto-install these servers
+})
+
