@@ -3,13 +3,14 @@ require("nvim-tree").setup({
 		sorter = "case_sensitive",
 	},
 	view = {
-		width = 30,
+		adaptive_size = true,
+    width = {}
 	},
 	renderer = {
 		group_empty = true,
 	},
 	filters = {
-		dotfiles = true,
+		dotfiles = false,
 	},
 	update_focused_file = {
 		enable = true,
@@ -17,7 +18,7 @@ require("nvim-tree").setup({
 	on_attach = function(bufnr)
 		local api = require("nvim-tree.api")
 
-    api.config.mappings.default_on_attach(bufnr)
+		api.config.mappings.default_on_attach(bufnr)
 
 		local function opts(desc)
 			return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -40,12 +41,23 @@ require("nvim-tree").setup({
 				api.node.open.edit()
 			end
 		end, opts("Open File or Expand Directory"))
-    vim.keymap.set("n", "<CR>", require("nvim-tree.api").node.open.edit, opts("Open"))
-
+		vim.keymap.set("n", "<CR>", require("nvim-tree.api").node.open.edit, opts("Open"))
 	end,
 })
 
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", function()
+  local api = require("nvim-tree.api")
+  local view = require("nvim-tree.view")
+
+  if view.is_visible() then
+    -- Si ya está abierto, ciérralo
+    api.tree.close()
+  else
+    -- Abre como en `nvim .`
+    api.tree.open({ find_file = false, focus = true })
+    vim.cmd("wincmd o")  -- 🔥 Hace que ocupe toda la pantalla (solo esa ventana)
+  end
+end, { noremap = true, silent = true, desc = "NvimTree fullscreen like `nvim .`" })
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = vim.api.nvim_create_augroup("NvimTreeAutoClose", { clear = true }),
 	callback = function()
