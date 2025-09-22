@@ -13,4 +13,13 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   end
 })
 
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    local col = vim.fn.col(".")
+    local line = vim.fn.getline(".")
+    if col <= #line then
+      vim.cmd("normal! l")
+    end
+  end,
+})
 

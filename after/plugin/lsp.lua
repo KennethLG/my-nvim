@@ -1,4 +1,3 @@
-
 -- LSP Configuration
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -54,14 +53,14 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
 end
 
-lspconfig.ts_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities
+vim.lsp.config("ts_ls", {
+	on_attach = on_attach,
+	capabilities = capabilities,
 })
 
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config("rust_analyzer", {
+	on_attach = on_attach,
+	capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
 			checkOnSave = { command = "clippy" },
@@ -71,7 +70,7 @@ lspconfig.rust_analyzer.setup({
 	},
 })
 
-lspconfig.clangd.setup({
+vim.lsp.config("clangd", {
 	on_attach = function(client, bufnr)
 		client.server_capabilities.signatureHelpProvider = nil
 		on_attach(client, bufnr)
@@ -80,6 +79,23 @@ lspconfig.clangd.setup({
 		return vim.fn.getcwd()
 	end,
 	cmd = { "clangd", "--background-index" },
+})
+
+vim.lsp.config("pyright", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		python = {
+			venvPath = ".",
+			venv = ".venv",
+			pythonPath = "./.venv/bin/python",
+			analysis = {
+				typeCheckingMode = "off",
+				autoImportCompletions = true,
+				diagnosticMode = "openFilesOnly",
+			},
+		},
+	},
 })
 
 vim.diagnostic.config({
@@ -123,6 +139,6 @@ require("mason").setup()
 
 -- Mason-LSPConfig setup with automatic installation
 require("mason-lspconfig").setup({
-  ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls" }, -- Auto-install these servers
+	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls", "pyright" }, -- Auto-install these servers
 })
 

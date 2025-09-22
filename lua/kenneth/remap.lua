@@ -15,4 +15,3 @@ vim.keymap.set("n", "<leader>bd", ":bp | bd #<CR>", { noremap = true })
 
 vim.keymap.set("n", "zR", function() vim.cmd("set foldlevel=99") end) -- Open all folds
 vim.keymap.set("n", "zM", function() vim.cmd("set foldlevel=0") end)  -- Close all folds
-
