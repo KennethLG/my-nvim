@@ -1,8 +1,8 @@
 -- LSP Configuration
-local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local telescope_builtin = require("telescope.builtin")
 local lsp_signature = require("lsp_signature")
+local util = require("lspconfig.util")
 
 local function on_attach(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
@@ -71,14 +71,10 @@ vim.lsp.config("rust_analyzer", {
 })
 
 vim.lsp.config("clangd", {
-	on_attach = function(client, bufnr)
-		client.server_capabilities.signatureHelpProvider = nil
-		on_attach(client, bufnr)
-	end,
-	root_dir = function()
-		return vim.fn.getcwd()
-	end,
-	cmd = { "clangd", "--background-index" },
+  cmd = { "clangd", "--background-index" },
+  root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
+  on_attach = on_attach,
+  capabilities = capabilities,
 })
 
 vim.lsp.config("pyright", {
@@ -97,6 +93,28 @@ vim.lsp.config("pyright", {
 		},
 	},
 })
+
+vim.lsp.config("lua_ls", {
+  cmd = { "lua-language-server" },  -- asegúrate de que lua-language-server esté en PATH
+  filetypes = { "lua" },
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },  -- para que no marque `vim` como variable desconocida
+      },
+      runtime = {
+        version = "LuaJIT",
+      },
+    },
+  },
+  on_attach = on_attach,
+})
+
+vim.lsp.enable("clangd")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("pyright")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("rust_analyzer")
 
 vim.diagnostic.config({
 	virtual_text = true, -- Show diagnostics inline
@@ -137,8 +155,9 @@ cmp.setup({
 -- Mason setup
 require("mason").setup()
 
--- Mason-LSPConfig setup with automatic installation
-require("mason-lspconfig").setup({
-	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls", "pyright" }, -- Auto-install these servers
-})
+-- -- Mason-LSPConfig setup with automatic installation
+-- require("mason-lspconfig").setup({
+-- 	ensure_installed = { "ts_ls", "biome", "rust_analyzer", "clangd", "jdtls", "pyright", "lua_ls" },
+--   automatic_enable = true
+-- })
 
