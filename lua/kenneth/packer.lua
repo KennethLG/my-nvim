@@ -3,6 +3,18 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+	use({
+		"hrsh7th/nvim-cmp", -- Autocompletado principal
+		"hrsh7th/cmp-nvim-lsp", -- Fuente: LSP
+		"hrsh7th/cmp-buffer", -- Fuente: buffer actual
+		"hrsh7th/cmp-path", -- Fuente: rutas de archivos
+		"hrsh7th/cmp-cmdline", -- Fuente: línea de comandos
+		"L3MON4D3/LuaSnip", -- Snippets
+		"saadparwaiz1/cmp_luasnip", -- Fuente: snippets
+	})
+
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig")
 
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -16,19 +28,6 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("theprimeagen/harpoon")
 	use("mbbill/undotree")
-	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			{ "williamboman/mason.nvim", tag = "v1.*" },
-			{ "williamboman/mason-lspconfig.nvim", tag = "v1.*" },
-			"hrsh7th/nvim-cmp",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-		},
-	})
 
 	use({ "akinsho/toggleterm.nvim", version = "*" })
 
@@ -91,6 +90,7 @@ return require("packer").startup(function(use)
 			"nvim-neotest/nvim-nio",
 		},
 	})
+  use { "theHamsta/nvim-dap-virtual-text", requires = { "mfussenegger/nvim-dap" }}
 	use({
 		"RRethy/vim-illuminate",
 	})
