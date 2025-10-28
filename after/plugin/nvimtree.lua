@@ -50,12 +50,10 @@ vim.keymap.set("n", "<leader>e", function()
   local view = require("nvim-tree.view")
 
   if view.is_visible() then
-    -- Si ya está abierto, ciérralo
     api.tree.close()
   else
-    -- Abre como en `nvim .`
     api.tree.open({ find_file = false, focus = true })
-    vim.cmd("wincmd o")  -- 🔥 Hace que ocupe toda la pantalla (solo esa ventana)
+    vim.cmd("wincmd o")
   end
 end, { noremap = true, silent = true, desc = "NvimTree fullscreen like `nvim .`" })
 vim.api.nvim_create_autocmd("BufEnter", {

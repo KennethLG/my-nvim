@@ -20,7 +20,7 @@ vim.opt.undofile = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 

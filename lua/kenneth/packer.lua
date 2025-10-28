@@ -90,7 +90,7 @@ return require("packer").startup(function(use)
 			"nvim-neotest/nvim-nio",
 		},
 	})
-  use { "theHamsta/nvim-dap-virtual-text", requires = { "mfussenegger/nvim-dap" }}
+	use({ "theHamsta/nvim-dap-virtual-text", requires = { "mfussenegger/nvim-dap" } })
 	use({
 		"RRethy/vim-illuminate",
 	})
@@ -140,6 +140,13 @@ return require("packer").startup(function(use)
 					use_focus = true,
 				},
 			})
+		end,
+	})
+	use({
+		"sphamba/smear-cursor.nvim",
+		opts = {},
+		config = function()
+			require("smear_cursor").enabled = true
 		end,
 	})
 end)

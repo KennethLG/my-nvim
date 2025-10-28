@@ -58,25 +58,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
 		end, opts)
 
-		-- Show diagnostics popup
 		vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
 
-		-- Ejemplo: si soporta implementaciones
 		if client:supports_method("textDocument/implementation") then
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 		end
 
-		-- -- Autocompletado
-		-- if client:supports_method("textDocument/completion") then
-		-- 	vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-		-- end
-
-		if client:supports_method("textDocument/implementation") then
-			-- Create a keymap for vim.lsp.buf.implementation ...
-		end
-		-- if client:supports_method("textDocument/completion") then
-		-- 	vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-		-- end
 		if
 			not client:supports_method("textDocument/willSaveWaitUntil")
 			and client:supports_method("textDocument/formatting")
