@@ -56,6 +56,7 @@ vim.keymap.set("n", "<leader>e", function()
     vim.cmd("wincmd o")
   end
 end, { noremap = true, silent = true, desc = "NvimTree fullscreen like `nvim .`" })
+
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = vim.api.nvim_create_augroup("NvimTreeAutoClose", { clear = true }),
 	callback = function()

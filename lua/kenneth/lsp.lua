@@ -103,11 +103,9 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
 		["<Down>"] = cmp.mapping.select_next_item(), -- Next suggestion
 		["<Up>"] = cmp.mapping.select_prev_item(), -- Previous suggestion
-		["<Esc>"] = cmp.mapping.abort(), -- Abort completion
+		["<C-e>"] = cmp.mapping.abort(), -- Abort completion
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
+			if luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
 			else
 				fallback()
@@ -115,9 +113,7 @@ cmp.setup({
 		end, { "i", "s" }),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
+			if luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
 				fallback()
