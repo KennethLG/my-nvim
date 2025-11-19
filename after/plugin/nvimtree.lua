@@ -3,8 +3,8 @@ require("nvim-tree").setup({
 		sorter = "case_sensitive",
 	},
 	view = {
-		adaptive_size = true,
-    width = {}
+		adaptive_size = false,
+    width = math.floor(vim.o.columns * 0.30)
 	},
 	renderer = {
 		group_empty = true,
@@ -53,7 +53,6 @@ vim.keymap.set("n", "<leader>e", function()
     api.tree.close()
   else
     api.tree.open({ find_file = false, focus = true })
-    vim.cmd("wincmd o")
   end
 end, { noremap = true, silent = true, desc = "NvimTree fullscreen like `nvim .`" })
 

@@ -10,6 +10,14 @@ require("telescope").setup({
 		},
 		path_display = { "truncate" },
 		dynamic_preview_title = true,
+
+    file_ignore_patterns = {
+      "node_modules/",
+      "%.git/",
+      "dist/",
+      "build/",
+      "coverage/"
+    }
 	},
 })
 
