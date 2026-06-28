@@ -1,22 +1,3 @@
-require("catppuccin").setup({
-  flavour = "mocha",
-  transparent_background = true,
-  integrations = {
-    cmp = true,
-    gitsigns = true,
-    nvimtree = true,
-    treesitter = true,
-    bufferline = true,
-    mini = { enabled = true, indentscope_color = "" },
-  },
-})
-
-require("tokyonight").setup({ transparent = true })
-require("kanagawa").setup({ transparent = true })
-vim.g.everforest_transparent_background = 1
-require("gruvbox").setup({ transparent_mode = true })
-require("rose-pine").setup({ disable_background = true })
-
 local themes = {
   "catppuccin",
   "tokyonight-night",
@@ -51,7 +32,7 @@ if is_random_enabled() then
   math.randomseed(os.time())
   theme = themes[math.random(#themes)]
 else
-  theme = "catppuccin" -- default
+  theme = "catppuccin"
 end
 
 vim.cmd.colorscheme(theme)
@@ -64,4 +45,3 @@ vim.api.nvim_create_user_command("ToggleColorschemeRandom", function()
 end, {})
 
 vim.keymap.set("n", "<leader>cr", "<cmd>ToggleColorschemeRandom<CR>", { desc = "Toggle random colorscheme" })
-

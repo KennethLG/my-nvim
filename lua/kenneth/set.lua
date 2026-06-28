@@ -32,10 +32,8 @@ vim.opt.updatetime = 50
 
 -- vim.opt.colorcolumn = "80"
 
-vim.g.mapleader = " "
-
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99        -- Keep most folds open
 vim.opt.foldlevelstart = 99   -- Open all folds on startup
 vim.opt.foldenable = true     -- Enable folding
