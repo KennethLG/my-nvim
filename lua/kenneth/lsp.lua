@@ -134,6 +134,14 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("ts_ls")
 
+-- Godot LSP connects to the editor's built-in server (must have Godot open)
+vim.lsp.config("gdscript", {
+  cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+  filetypes = { "gdscript" },
+  root_markers = { "project.godot" },
+})
+vim.lsp.enable("gdscript")
+
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "clangd", "lua_ls", "ts_ls", "biome" },

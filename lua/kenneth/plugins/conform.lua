@@ -8,6 +8,7 @@ require("conform").setup({
     lua             = { "stylua" },
     cpp             = { "clang_format" },
     c               = { "clang_format" },
+    gdscript        = { "gdformat"}
   },
   notify_on_error = true,
 })

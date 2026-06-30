@@ -2,6 +2,7 @@ require("nvim-treesitter").setup()
 require("nvim-treesitter.install").install({
   "tsx", "javascript", "typescript", "c", "lua", "vim", "vimdoc",
   "query", "markdown", "markdown_inline", "graphql", "cpp", "html", "css", "java",
+  "gdscript",
 })
 
 local select = require("nvim-treesitter-textobjects.select")
